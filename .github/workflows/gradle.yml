@@ -13,15 +13,12 @@ on:
   pull_request:
     branches: [ "main" ]
 
-permissions:
-  contents: write
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
-      security-events: write 
+      security-events: write
+      contents: write
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -36,7 +33,9 @@ jobs:
       with:
         languages: java
     - name: Run snapshot action
-      uses: mikepenz/gradle-dependency-submission@v0.8.6       
+      uses: mikepenz/gradle-dependency-submission@v0.8.6      
+#       with:
+#         gradle-project-path: "Log4jTest"
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
